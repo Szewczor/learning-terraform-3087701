@@ -1,3 +1,7 @@
+provider "aws" {
+  region = "eu-central-1" # Ensure this matches your target zone
+}
+
 data "aws_ami" "app_ami" {
   most_recent = true
 
@@ -16,7 +20,7 @@ data "aws_ami" "app_ami" {
 
 resource "aws_instance" "web" {
   ami           = data.aws_ami.app_ami.id
-  instance_type = "t3.nano"
+  instance_type = "t3.micro" # <--- Changed from t3.nano
 
   tags = {
     Name = "HelloWorld"
